@@ -2,18 +2,22 @@
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.navi.dogbreedapp.DogModel
-import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.databinding.ActivityDogListBinding
 
  class DogListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = ActivityDogListBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_dog_list)
+        setContentView(binding.root)
 
-        val dogList = getFakeDogs()
         val recycler = binding.dogRecycler
+        recycler.layoutManager = LinearLayoutManager(this)
+        val dogAdapter = DogAdapter()
+
+        recycler.adapter = dogAdapter
+        dogAdapter.submitList(getFakeDogs())
     }
 
     private fun getFakeDogs(): MutableList<DogModel> {
