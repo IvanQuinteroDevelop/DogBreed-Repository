@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.navi.dogbreedapp.DogModel
 import com.navi.dogbreedapp.databinding.DogListItemBinding
 
-class DogAdapter : ListAdapter<DogModel, DogAdapter.DogViewHolder>(DiffCallback) {
+class DogAdapter(onItemClicked: (dogModel: DogModel) -> Unit) : ListAdapter<DogModel, DogAdapter.DogViewHolder>(DiffCallback) {
+
+    var onItemClicked: (dogModel: DogModel) -> Unit = onItemClicked
 
     companion object DiffCallback : DiffUtil.ItemCallback<DogModel>() {
         override fun areItemsTheSame(oldItem: DogModel, newItem: DogModel): Boolean {
@@ -37,6 +39,9 @@ class DogAdapter : ListAdapter<DogModel, DogAdapter.DogViewHolder>(DiffCallback)
 
             fun bind(dog: DogModel) {
                 binding.dogName.text = dog.name
+                binding.dogName.setOnClickListener {
+                    onItemClicked(dog)
+                }
             }
     }
 

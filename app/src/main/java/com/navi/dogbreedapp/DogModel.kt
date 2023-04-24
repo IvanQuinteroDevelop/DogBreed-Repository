@@ -1,5 +1,9 @@
 package com.navi.dogbreedapp
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class DogModel(
     val id: Long,
     val index: Int,
@@ -12,4 +16,4 @@ data class DogModel(
     val temperament: String,
     val weightFemale: String,
     val weightMale: String
-)
+): Parcelable
