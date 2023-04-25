@@ -1,9 +1,7 @@
 package com.navi.dogbreedapp.api.responses
 
-import com.navi.dogbreedapp.DogModel
-
-sealed class ApiResponseStatus {
-    object Loading : ApiResponseStatus()
-    class Success(val dogList: List<DogModel>): ApiResponseStatus()
-    class Error(val messageId: Int): ApiResponseStatus()
+sealed class ApiResponseStatus<T> {
+    class Loading<T>: ApiResponseStatus<T>()
+    class Success<T>(val data: T): ApiResponseStatus<T>()
+    class Error<T>(val messageId: Int): ApiResponseStatus<T>()
 }

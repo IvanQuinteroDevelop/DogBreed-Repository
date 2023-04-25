@@ -1,5 +1,6 @@
 package com.navi.dogbreedapp.doglist
 
+import com.navi.dogbreedapp.DogModel
 import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.api.DogsApi.retrofitService
 import com.navi.dogbreedapp.api.dto.DogDTOMapper
@@ -9,7 +10,7 @@ import kotlinx.coroutines.withContext
 import java.net.UnknownHostException
 
 class DogRepository {
-    suspend fun downloadDogs(): ApiResponseStatus {
+    suspend fun downloadDogs(): ApiResponseStatus<List<DogModel>> {
         return withContext(Dispatchers.IO) {
             try {
                 val dogListApiResponse = retrofitService.getAllDogs()
