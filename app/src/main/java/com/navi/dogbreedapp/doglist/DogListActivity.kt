@@ -38,19 +38,11 @@ class DogListActivity : AppCompatActivity() {
         }
         dogListViewModel.status.observe(this) { status ->
             when (status) {
-                ApiResponseStatus.LOADING -> {
-                    loader.visibility = View.VISIBLE
-                }
-                ApiResponseStatus.SUCCESS -> {
+                is ApiResponseStatus.Loading -> loader.visibility = View.VISIBLE
+                is ApiResponseStatus.Success -> loader.visibility = View.GONE
+                is ApiResponseStatus.Error -> {
                     loader.visibility = View.GONE
-                }
-                ApiResponseStatus.ERROR -> {
-                    loader.visibility = View.GONE
-                    Toast.makeText(this, "Error to download data", Toast.LENGTH_SHORT).show()
-                }
-                else -> {
-                    Toast.makeText(this, "Unknown error", Toast.LENGTH_SHORT).show()
-                    loader.visibility = View.GONE
+                    Toast.makeText(this, status.messageId, Toast.LENGTH_SHORT).show()
                 }
             }
         }

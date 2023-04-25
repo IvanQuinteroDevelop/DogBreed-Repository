@@ -2,4 +2,6 @@
     <string name="app_name">DogBreedApp</string>
     <string name="dog_expectancy_format">%s years</string>
     <string name="dog_index_format"># %s</string>
+    <string name="error_connection">There is not internet connection</string>
+    <string name="unknown_error">There was an error</string>
 </resources>
