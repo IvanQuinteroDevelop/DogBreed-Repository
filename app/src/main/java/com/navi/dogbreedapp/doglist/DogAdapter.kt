@@ -5,12 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.navi.dogbreedapp.DogModel
 import com.navi.dogbreedapp.databinding.DogListItemBinding
 
-class DogAdapter(onItemClicked: (dogModel: DogModel) -> Unit) : ListAdapter<DogModel, DogAdapter.DogViewHolder>(DiffCallback) {
-
-    var onItemClicked: (dogModel: DogModel) -> Unit = onItemClicked
+class DogAdapter(var onItemClicked: (dogModel: DogModel) -> Unit) : ListAdapter<DogModel, DogAdapter.DogViewHolder>(DiffCallback) {
 
     companion object DiffCallback : DiffUtil.ItemCallback<DogModel>() {
         override fun areItemsTheSame(oldItem: DogModel, newItem: DogModel): Boolean {
@@ -38,8 +37,9 @@ class DogAdapter(onItemClicked: (dogModel: DogModel) -> Unit) : ListAdapter<DogM
         RecyclerView.ViewHolder(binding.root) {
 
             fun bind(dog: DogModel) {
+                binding.dogImage.load(dog.imageUrl)
                 binding.dogName.text = dog.name
-                binding.dogName.setOnClickListener {
+                binding.dogListItem.setOnClickListener {
                     onItemClicked(dog)
                 }
             }

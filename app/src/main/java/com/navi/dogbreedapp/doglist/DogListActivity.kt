@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.databinding.ActivityDogListBinding
 import com.navi.dogbreedapp.dogdetail.DogDetailActivity
@@ -22,7 +22,7 @@ class DogListActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val recycler = binding.dogRecycler
-        recycler.layoutManager = LinearLayoutManager(this)
+        recycler.layoutManager = GridLayoutManager(this, 3)
 
         val loader = binding.loader
 
