@@ -7,13 +7,11 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
+import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.navi.dogbreedapp.WholeImageActivity.Companion.IMAGE_URI_KEY
@@ -70,8 +68,18 @@ class MainActivity : AppCompatActivity() {
 
                 // Select back camera as a default
                 val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+                val imageAnalysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                imageAnalysis.setAnalyzer(cameraExecutor) { imageProxy ->
+                    val rotationDegrees = imageProxy.imageInfo.rotationDegrees
+                    Log.d("TAG", "startCamera: degree $rotationDegrees")
+                    imageProxy.close()
+                }
+
                 // Bind use cases to camera
-                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture)
+                cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture, imageAnalysis)
             }, ContextCompat.getMainExecutor(this)
         )
     }
