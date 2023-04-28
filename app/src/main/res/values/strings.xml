@@ -4,4 +4,7 @@
     <string name="dog_index_format"># %s</string>
     <string name="error_connection">There is not internet connection</string>
     <string name="unknown_error">There was an error</string>
+    <string name="title_dialog_camera_permission">Camera Permission</string>
+    <string name="message_dialog_camera_permission">Would you like to go to the alert to accept the permissions to use the camera?</string>
+    <string name="you_need_camera_permission">You need to accept camera permission to use camera</string>
 </resources>
