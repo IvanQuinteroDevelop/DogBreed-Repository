@@ -5,6 +5,8 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +16,7 @@ import androidx.camera.core.ImageCaptureException
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
+import com.navi.dogbreedapp.WholeImageActivity.Companion.IMAGE_URI_KEY
 import com.navi.dogbreedapp.databinding.ActivityMainBinding
 import com.navi.dogbreedapp.doglist.DogListActivity
 import java.io.File
@@ -103,7 +106,14 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "Error taking photo: code ${error.message}", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) { }
+                override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
+                    Handler(Looper.getMainLooper()).post {
+                        val imageUri = outputFileResults.savedUri
+                        val extra = Bundle()
+                        extra.putString(IMAGE_URI_KEY, imageUri.toString())
+                        goToActivity(WholeImageActivity(), extra)
+                    }
+                }
             })
     }
 
@@ -142,8 +152,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToActivity(activity: Activity) {
+    private fun goToActivity(activity: Activity, extra: Bundle? = null) {
         val intent = Intent(this, activity::class.java)
+        if (extra != null) intent.putExtras(extra)
         startActivity(intent)
     }
 }
