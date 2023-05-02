@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -17,6 +18,8 @@ import androidx.core.content.ContextCompat
 import com.navi.dogbreedapp.WholeImageActivity.Companion.IMAGE_URI_KEY
 import com.navi.dogbreedapp.databinding.ActivityMainBinding
 import com.navi.dogbreedapp.doglist.DogListActivity
+import com.navi.dogbreedapp.machinelearning.Classifier
+import org.tensorflow.lite.support.common.FileUtil
 import java.io.File
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -26,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var imageCapture: ImageCapture
     private lateinit var cameraExecutor: ExecutorService
+    private lateinit var classifier: Classifier
     private var isCameraReady = false
 
     private val requestPermissionLauncher =
@@ -47,6 +51,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         manageClicks()
         requestCameraPermission()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        classifier = Classifier(
+            FileUtil.loadMappedFile(this@MainActivity, MODEL_PATH),
+            FileUtil.loadLabels(this@MainActivity, LABEL_PATH)
+        )
     }
 
     override fun onDestroy() {
@@ -118,6 +130,9 @@ class MainActivity : AppCompatActivity() {
                     Handler(Looper.getMainLooper()).post {
                         val imageUri = outputFileResults.savedUri
                         val extra = Bundle()
+
+                        val bitmap = BitmapFactory.decodeFile(imageUri?.path)
+                        classifier.recognizeImage(bitmap)
                         extra.putString(IMAGE_URI_KEY, imageUri.toString())
                         goToActivity(WholeImageActivity(), extra)
                     }
