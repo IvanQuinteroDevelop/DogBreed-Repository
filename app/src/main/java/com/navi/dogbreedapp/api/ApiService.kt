@@ -1,8 +1,8 @@
 package com.navi.dogbreedapp.api
 
-import com.navi.dogbreedapp.BASE_URL
-import com.navi.dogbreedapp.GET_ALL_DOGS_END_POINT
-import com.navi.dogbreedapp.GET_DOG_BY_ML_ID
+import com.navi.dogbreedapp.utils.BASE_URL
+import com.navi.dogbreedapp.utils.GET_ALL_DOGS_END_POINT
+import com.navi.dogbreedapp.utils.GET_DOG_BY_ML_ID
 import com.navi.dogbreedapp.api.responses.DogApiResponse
 import com.navi.dogbreedapp.api.responses.DogListApiResponse
 import retrofit2.Retrofit

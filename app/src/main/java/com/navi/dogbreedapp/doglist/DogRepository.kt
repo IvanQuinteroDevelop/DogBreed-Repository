@@ -5,8 +5,11 @@ import com.navi.dogbreedapp.api.DogsApi.retrofitService
 import com.navi.dogbreedapp.api.dto.DogDTOMapper
 import com.navi.dogbreedapp.api.makeNetworkCall
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DogRepository {
+@Singleton
+class DogRepository @Inject constructor() {
     suspend fun downloadDogs(): ApiResponseStatus<List<DogModel>> {
         return makeNetworkCall {
             val dogListApiResponse = retrofitService.getAllDogs()

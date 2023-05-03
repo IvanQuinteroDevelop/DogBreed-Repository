@@ -6,7 +6,9 @@ import coil.load
 import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.databinding.ActivityDogDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DogDetailActivity : AppCompatActivity() {
 
     companion object {

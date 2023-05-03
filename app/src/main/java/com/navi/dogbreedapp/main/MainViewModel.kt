@@ -11,10 +11,13 @@ import com.navi.dogbreedapp.doglist.DogRepository
 import com.navi.dogbreedapp.machinelearning.Classifier
 import com.navi.dogbreedapp.machinelearning.ClassifierRepository
 import com.navi.dogbreedapp.machinelearning.DogRecognition
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import java.nio.MappedByteBuffer
+import javax.inject.Inject
 
-class MainViewModel: ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val dogRepository: DogRepository): ViewModel() {
 
     private val _dog = MutableLiveData<DogModel>()
     val dog: LiveData<DogModel> get() = _dog
@@ -25,7 +28,6 @@ class MainViewModel: ViewModel() {
     private val _dogRecognition = MutableLiveData<DogRecognition>()
     val dogRecognition: LiveData<DogRecognition> get() = _dogRecognition
 
-    private val dogRepository = DogRepository()
     private lateinit var classifierRepository: ClassifierRepository
 
     fun setupClassifier(tfLiteModel: MappedByteBuffer, labels: List<String>) {

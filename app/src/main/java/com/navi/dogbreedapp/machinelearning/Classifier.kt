@@ -1,7 +1,7 @@
 package com.navi.dogbreedapp.machinelearning
 
 import android.graphics.Bitmap
-import com.navi.dogbreedapp.MAX_RECOGNITION_DOG_RESULTS
+import com.navi.dogbreedapp.utils.MAX_RECOGNITION_DOG_RESULTS
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.TensorProcessor
 import org.tensorflow.lite.support.common.ops.DequantizeOp

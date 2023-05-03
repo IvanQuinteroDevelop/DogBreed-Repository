@@ -11,7 +11,9 @@ import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.databinding.ActivityDogListBinding
 import com.navi.dogbreedapp.dogdetail.DogDetailActivity
 import com.navi.dogbreedapp.dogdetail.DogDetailActivity.Companion.DOG_KEY
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DogListActivity : AppCompatActivity() {
 
     private val dogListViewModel: DogListViewModel by viewModels()

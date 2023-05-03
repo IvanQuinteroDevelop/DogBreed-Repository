@@ -6,17 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DogListViewModel: ViewModel() {
+@HiltViewModel
+class DogListViewModel @Inject constructor(private val dogRepository: DogRepository): ViewModel() {
 
     private val _dogList = MutableLiveData<List<DogModel>>()
     val dogList: LiveData<List<DogModel>> get() = _dogList
 
     private val _status = MutableLiveData<ApiResponseStatus<List<DogModel>>>()
     val status: LiveData<ApiResponseStatus<List<DogModel>>> get() = _status
-
-    private val dogRepository = DogRepository()
 
     init {
         downloadDogs()
