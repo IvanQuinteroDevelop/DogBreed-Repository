@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.navi.dogbreedapp.DogModel
+import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.doglist.DogRepository
 import com.navi.dogbreedapp.machinelearning.Classifier

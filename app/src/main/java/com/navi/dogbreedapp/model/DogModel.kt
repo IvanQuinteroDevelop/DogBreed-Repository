@@ -1,4 +1,4 @@
-package com.navi.dogbreedapp
+package com.navi.dogbreedapp.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

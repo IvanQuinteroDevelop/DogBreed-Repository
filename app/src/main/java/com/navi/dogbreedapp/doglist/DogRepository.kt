@@ -1,6 +1,6 @@
 package com.navi.dogbreedapp.doglist
 
-import com.navi.dogbreedapp.DogModel
+import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.api.DogsApi.retrofitService
 import com.navi.dogbreedapp.api.dto.DogDTOMapper
 import com.navi.dogbreedapp.api.makeNetworkCall

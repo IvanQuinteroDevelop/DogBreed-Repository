@@ -1,4 +1,4 @@
-package com.navi.dogbreedapp
+package com.navi.dogbreedapp.wholeimage
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
