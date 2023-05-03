@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        classifier = Classifier(
+        mainViewModel.setupClassifier(
             FileUtil.loadMappedFile(this@MainActivity, MODEL_PATH),
             FileUtil.loadLabels(this@MainActivity, LABEL_PATH)
         )
@@ -94,6 +94,10 @@ class MainActivity : AppCompatActivity() {
                 goToActivity(DogDetailActivity(), extra)
             }
         }
+
+        mainViewModel.dogRecognition.observe(this) {
+            enableTakePhotoButton(it)
+        }
     }
 
     private fun startCamera() {
@@ -115,12 +119,7 @@ class MainActivity : AppCompatActivity() {
                     .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
                     .build()
                 imageAnalysis.setAnalyzer(cameraExecutor) { imageProxy ->
-                    val bitmapPhoto = Utils.convertImageProxyToBitmap(imageProxy)
-                    if (bitmapPhoto != null) {
-                        val dogRecognized = classifier.recognizeImage(bitmapPhoto).first()
-                        enableTakePhotoButton(dogRecognized)
-                    }
-                    imageProxy.close()
+                    mainViewModel.recognizeImage(imageProxy)
                 }
 
                 // Bind use cases to camera
