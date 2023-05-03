@@ -4,7 +4,7 @@ import com.navi.dogbreedapp.DogModel
 
 class DogDTOMapper {
 
-    private fun fromDogDTOToDogDomain(dogDTO: DogDTO): DogModel {
+    fun fromDogDTOToDogDomain(dogDTO: DogDTO): DogModel {
 
         return DogModel(
             dogDTO.id,
