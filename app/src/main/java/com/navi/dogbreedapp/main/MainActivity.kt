@@ -16,8 +16,6 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.navi.dogbreedapp.utils.LABEL_PATH
-import com.navi.dogbreedapp.utils.MODEL_PATH
 import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.databinding.ActivityMainBinding
@@ -26,7 +24,6 @@ import com.navi.dogbreedapp.dogdetail.DogDetailActivity.Companion.DOG_KEY
 import com.navi.dogbreedapp.doglist.DogListActivity
 import com.navi.dogbreedapp.machinelearning.DogRecognition
 import dagger.hilt.android.AndroidEntryPoint
-import org.tensorflow.lite.support.common.FileUtil
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -59,14 +56,6 @@ class MainActivity : AppCompatActivity() {
         observeLiveData()
         manageClicks()
         requestCameraPermission()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mainViewModel.setupClassifier(
-            FileUtil.loadMappedFile(this@MainActivity, MODEL_PATH),
-            FileUtil.loadLabels(this@MainActivity, LABEL_PATH)
-        )
     }
 
     override fun onDestroy() {

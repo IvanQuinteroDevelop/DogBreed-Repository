@@ -5,19 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
-import com.navi.dogbreedapp.doglist.DogRepository
-import com.navi.dogbreedapp.machinelearning.Classifier
-import com.navi.dogbreedapp.machinelearning.ClassifierRepository
+import com.navi.dogbreedapp.interfaces.ClassifierTasks
+import com.navi.dogbreedapp.interfaces.DogTasks
 import com.navi.dogbreedapp.machinelearning.DogRecognition
+import com.navi.dogbreedapp.model.DogModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.nio.MappedByteBuffer
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val dogRepository: DogRepository): ViewModel() {
+class MainViewModel @Inject constructor(private val dogTasks: DogTasks, private val classifierTasks: ClassifierTasks): ViewModel() {
 
     private val _dog = MutableLiveData<DogModel>()
     val dog: LiveData<DogModel> get() = _dog
@@ -28,23 +26,16 @@ class MainViewModel @Inject constructor(private val dogRepository: DogRepository
     private val _dogRecognition = MutableLiveData<DogRecognition>()
     val dogRecognition: LiveData<DogRecognition> get() = _dogRecognition
 
-    private lateinit var classifierRepository: ClassifierRepository
-
-    fun setupClassifier(tfLiteModel: MappedByteBuffer, labels: List<String>) {
-        val classifier = Classifier(tfLiteModel, labels)
-        classifierRepository = ClassifierRepository(classifier)
-    }
-
     fun recognizeImage(imageProxy: ImageProxy) {
         viewModelScope.launch {
-            _dogRecognition.value = classifierRepository.recognizeImage(imageProxy)
+            _dogRecognition.value = classifierTasks.recognizeImage(imageProxy)
             imageProxy.close()
         }
     }
 
     fun getDogByMLId(mlDogId: String) {
         viewModelScope.launch {
-            handleResponseStatus(dogRepository.getDogByMLId(mlDogId))
+            handleResponseStatus(dogTasks.getDogByMLId(mlDogId))
         }
     }
 
