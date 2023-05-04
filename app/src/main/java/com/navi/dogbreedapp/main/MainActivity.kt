@@ -16,27 +16,23 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import com.navi.dogbreedapp.LABEL_PATH
-import com.navi.dogbreedapp.MODEL_PATH
 import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.databinding.ActivityMainBinding
 import com.navi.dogbreedapp.dogdetail.DogDetailActivity
 import com.navi.dogbreedapp.dogdetail.DogDetailActivity.Companion.DOG_KEY
 import com.navi.dogbreedapp.doglist.DogListActivity
-import com.navi.dogbreedapp.machinelearning.Classifier
 import com.navi.dogbreedapp.machinelearning.DogRecognition
-import com.navi.dogbreedapp.utils.Utils
-import org.tensorflow.lite.support.common.FileUtil
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var imageCapture: ImageCapture
     private lateinit var cameraExecutor: ExecutorService
-    private lateinit var classifier: Classifier
     private var isCameraReady = false
     private val mainViewModel: MainViewModel by viewModels()
 
@@ -60,14 +56,6 @@ class MainActivity : AppCompatActivity() {
         observeLiveData()
         manageClicks()
         requestCameraPermission()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mainViewModel.setupClassifier(
-            FileUtil.loadMappedFile(this@MainActivity, MODEL_PATH),
-            FileUtil.loadLabels(this@MainActivity, LABEL_PATH)
-        )
     }
 
     override fun onDestroy() {

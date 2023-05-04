@@ -6,7 +6,7 @@
     <data>
         <variable
             name="dog"
-            type="com.navi.dogbreedapp.DogModel" />
+            type="com.navi.dogbreedapp.model.DogModel" />
     </data>
 
 

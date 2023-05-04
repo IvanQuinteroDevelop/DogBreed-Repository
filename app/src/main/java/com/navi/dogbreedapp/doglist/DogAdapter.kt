@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.navi.dogbreedapp.DogModel
+import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.databinding.DogListItemBinding
 
 class DogAdapter(var onItemClicked: (dogModel: DogModel) -> Unit) : ListAdapter<DogModel, DogAdapter.DogViewHolder>(DiffCallback) {

@@ -3,10 +3,12 @@ package com.navi.dogbreedapp.dogdetail
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import coil.load
-import com.navi.dogbreedapp.DogModel
+import com.navi.dogbreedapp.model.DogModel
 import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.databinding.ActivityDogDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DogDetailActivity : AppCompatActivity() {
 
     companion object {

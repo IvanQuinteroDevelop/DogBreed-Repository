@@ -1,6 +1,6 @@
 package com.navi.dogbreedapp.api.dto
 
-import com.navi.dogbreedapp.DogModel
+import com.navi.dogbreedapp.model.DogModel
 
 class DogDTOMapper {
 

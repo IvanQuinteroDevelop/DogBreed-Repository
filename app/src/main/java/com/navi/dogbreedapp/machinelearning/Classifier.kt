@@ -1,7 +1,7 @@
 package com.navi.dogbreedapp.machinelearning
 
 import android.graphics.Bitmap
-import com.navi.dogbreedapp.MAX_RECOGNITION_DOG_RESULTS
+import com.navi.dogbreedapp.utils.MAX_RECOGNITION_DOG_RESULTS
 import org.tensorflow.lite.Interpreter
 import org.tensorflow.lite.support.common.TensorProcessor
 import org.tensorflow.lite.support.common.ops.DequantizeOp
@@ -12,8 +12,9 @@ import org.tensorflow.lite.support.label.TensorLabel
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer
 import java.nio.MappedByteBuffer
 import java.util.*
+import javax.inject.Inject
 
-class Classifier(tfLiteModel: MappedByteBuffer, private val labels: List<String>) {
+class Classifier @Inject constructor(tfLiteModel: MappedByteBuffer, private val labels: List<String>) {
     /**
      * Image size along the x axis.
      */
