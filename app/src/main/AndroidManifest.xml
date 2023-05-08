@@ -17,10 +17,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".wholeimage.WholeImageActivity"
-            android:exported="false" />
+            android:name=".dogdetail.DogDetailComposeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dog_detail_compose"
+            android:theme="@style/Theme.DogBreedApp" />
         <activity
-            android:name=".dogdetail.DogDetailActivity"
+            android:name=".main.MainComposeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_main_compose"
+            android:theme="@style/Theme.DogBreedApp" />
+        <activity
+            android:name=".wholeimage.WholeImageActivity"
             android:exported="false" />
         <activity
             android:name=".doglist.DogListActivity"

@@ -9,8 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.databinding.ActivityDogListBinding
-import com.navi.dogbreedapp.dogdetail.DogDetailActivity
-import com.navi.dogbreedapp.dogdetail.DogDetailActivity.Companion.DOG_KEY
+import com.navi.dogbreedapp.dogdetail.DogDetailComposeActivity
+import com.navi.dogbreedapp.dogdetail.DogDetailComposeActivity.Companion.DOG_KEY
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,7 +29,7 @@ class DogListActivity : AppCompatActivity() {
         val loader = binding.loader
 
         val dogAdapter = DogAdapter {
-            val intent = Intent(this, DogDetailActivity::class.java)
+            val intent = Intent(this, DogDetailComposeActivity::class.java)
             intent.putExtra(DOG_KEY, it)
             startActivity(intent)
         }

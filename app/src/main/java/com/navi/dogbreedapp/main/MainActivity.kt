@@ -19,8 +19,8 @@ import androidx.core.content.ContextCompat
 import com.navi.dogbreedapp.R
 import com.navi.dogbreedapp.api.responses.ApiResponseStatus
 import com.navi.dogbreedapp.databinding.ActivityMainBinding
-import com.navi.dogbreedapp.dogdetail.DogDetailActivity
-import com.navi.dogbreedapp.dogdetail.DogDetailActivity.Companion.DOG_KEY
+import com.navi.dogbreedapp.dogdetail.DogDetailComposeActivity
+import com.navi.dogbreedapp.dogdetail.DogDetailComposeActivity.Companion.DOG_KEY
 import com.navi.dogbreedapp.doglist.DogListActivity
 import com.navi.dogbreedapp.machinelearning.DogRecognition
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
             if (dog != null) {
                 val extra = Bundle()
                 extra.putParcelable(DOG_KEY, dog)
-                goToActivity(DogDetailActivity(), extra)
+                goToActivity(DogDetailComposeActivity(), extra)
             }
         }
 
