@@ -1,5 +1,6 @@
 package com.navi.dogbreedapp.doglist
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,8 +18,8 @@ class DogListViewModel @Inject constructor(private val dogTasks: DogTasks): View
     private val _dogList = MutableLiveData<List<DogModel>>()
     val dogList: LiveData<List<DogModel>> get() = _dogList
 
-    private val _status = MutableLiveData<ApiResponseStatus<List<DogModel>>>()
-    val status: LiveData<ApiResponseStatus<List<DogModel>>> get() = _status
+    var status = mutableStateOf<ApiResponseStatus<Any>?>(null)
+    private set
 
     init {
         downloadDogs()
@@ -26,15 +27,15 @@ class DogListViewModel @Inject constructor(private val dogTasks: DogTasks): View
 
     private fun downloadDogs() {
         viewModelScope.launch {
-            _status.value = ApiResponseStatus.Loading()
-            handleResponseStatus(dogTasks.downloadDogs())
+            status.value = ApiResponseStatus.Loading()
+            handleResponseStatus(dogTasks.downloadDogs() as ApiResponseStatus<Any>)
         }
     }
 
-    private fun handleResponseStatus(apiResponseStatus: ApiResponseStatus<List<DogModel>>) {
+    private fun handleResponseStatus(apiResponseStatus: ApiResponseStatus<Any>) {
         if (apiResponseStatus is ApiResponseStatus.Success) {
-            _dogList.value = apiResponseStatus.data
+            _dogList.value = apiResponseStatus.data as List<DogModel>
         }
-        _status.value = apiResponseStatus
+        status.value = apiResponseStatus
     }
 }

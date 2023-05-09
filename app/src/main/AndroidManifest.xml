@@ -17,23 +17,29 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".wholeimage.WholeImageActivity"
-            android:exported="false" />
+            android:name=".doglist.DogListComposeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_dog_list_compose"
+            android:theme="@style/Theme.DogBreedApp" />
         <activity
-            android:name=".dogdetail.DogDetailActivity"
-            android:exported="false" />
+            android:name=".dogdetail.DogDetailComposeActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_dog_detail_compose"
+            android:theme="@style/Theme.DogBreedApp" />
         <activity
-            android:name=".doglist.DogListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".main.MainActivity"
-            android:exported="true">
+            android:name=".main.MainComposeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:label="@string/title_activity_main_compose"
+            android:theme="@style/Theme.DogBreedApp">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    </activity>
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.navi.dogbreedapp.main
 
 import androidx.camera.core.ImageProxy
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,8 +21,11 @@ class MainViewModel @Inject constructor(private val dogTasks: DogTasks, private 
     private val _dog = MutableLiveData<DogModel>()
     val dog: LiveData<DogModel> get() = _dog
 
-    private val _status = MutableLiveData<ApiResponseStatus<DogModel>>()
-    val status: LiveData<ApiResponseStatus<DogModel>> get() = _status
+    private val _permissionGranted = MutableLiveData(false)
+    val permissionGranted: LiveData<Boolean> get() = _permissionGranted
+
+    var status = mutableStateOf<ApiResponseStatus<DogModel>?>(null)
+    private set
 
     private val _dogRecognition = MutableLiveData<DogRecognition>()
     val dogRecognition: LiveData<DogRecognition> get() = _dogRecognition
@@ -31,6 +35,10 @@ class MainViewModel @Inject constructor(private val dogTasks: DogTasks, private 
             _dogRecognition.value = classifierTasks.recognizeImage(imageProxy)
             imageProxy.close()
         }
+    }
+
+    fun acceptPermission() {
+        _permissionGranted.value = true
     }
 
     fun getDogByMLId(mlDogId: String) {
@@ -44,6 +52,6 @@ class MainViewModel @Inject constructor(private val dogTasks: DogTasks, private 
             _dog.value = apiResponseStatus.data
         }
 
-        _status.value = apiResponseStatus
+        status.value = apiResponseStatus
     }
 }
