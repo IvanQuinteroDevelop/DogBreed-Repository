@@ -11,4 +11,5 @@
     <string name="you_need_camera_permission">You need to accept camera permission to use camera</string>
     <string name="title_activity_main_compose">MainComposeActivity</string>
     <string name="title_activity_dog_detail_compose">DogDetailComposeActivity</string>
+    <string name="title_activity_dog_list_compose">DogListComposeActivity</string>
 </resources>
